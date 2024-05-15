@@ -1,8 +1,7 @@
-import React from 'react';
-import {Routes,Route,Link} from 'react-router-dom';
+import React, { useEffect } from 'react';
+import {Routes,Route,Link, useLocation} from 'react-router-dom';
 import { Layout, Typography, Space } from 'antd';
-
-
+import { initGA, logPageView } from './ga';
 import {
     Navbar,
     Homepage,
@@ -16,6 +15,16 @@ import './App.css';
 import 'antd/dist/reset.css';
 
 const App = () => {
+    const location = useLocation();
+
+  useEffect(() => {
+    initGA();
+    logPageView();
+  }, []);
+
+  useEffect(() => {
+    logPageView();
+  }, [location]);
   return (
     <div>
         <div className='app'>
